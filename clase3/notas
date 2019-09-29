@@ -1,0 +1,76 @@
+Como super usuario
+
+nano /etc/fstab
+
+Aca se modifican los puntos de montajes 
+
+
+blkid #Este comando me muestra los puntos de montajes que existen 
+
+
+
+cat /etc/mtab 
+
+
+
+Para montar los puntos
+mount -t ext4 /dev/sdb6 /mnt /
+mount |grep -i media 
+
+
+lsblk -o NAME,LABEL,UUID  #Te muestra en forma de arbol los puntos de montajes existentes
+
+
+e2label  #poner etiquetas a montajes? 
+
+
+btrfs  #Automonta un arbol de sistemas de archivos
+
+
+
+Enlaces duros  y simbolicos: #
+
+ln  hola hard_hola 
+
+ls 
+
+
+
+Quotas 
+
+Limites de quotas: 
+
+Tipos
+    hard por usuario
+    soft por usuario 
+    hard por grupo 
+    soft por  grupo 
+    periodo de gracia 
+
+
+
+Instalar quota
+    sudo apt instal quota quotatool
+        Agregar usrquota,grpquota en fstab en el uuid
+        UUID=    / ext4  error=remount-RO,usrquota,grpquota 0 1 
+    sudo nano /etc/fstab 
+    cd /
+    sudo touch aquota.user aquota.group
+    sudo chmod 600 aquota*
+    mount -o remount / 
+    mount 
+    sudo quotacheck -mavug
+
+    sudo quotaon -avug
+    sudo quotaoff -avug
+    sudo adduser -d /home/user1 -m user1
+    sudo adduser -d /home/user2 -m user2
+    sudo passwd user1
+    sudo passwd user2
+
+    sudo edquota
+                soft  hard 
+                5000    10000 
+
+    sudo edquota -T 
+    sudo repquota -u /

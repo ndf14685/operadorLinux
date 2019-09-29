@@ -1,0 +1,173 @@
+7541  2019-09-28 15:27  mount
+ 7542  2019-09-28 15:28  blkid
+ 7543  2019-09-28 15:29  gsb
+ 7544  2019-09-28 15:29  gaa
+ 7545  2019-09-28 15:29  gc -m "Clase 2 Notas"
+ 7546  2019-09-28 15:29  gp
+ 7547* 2019-09-28 15:29  blkid
+ 7548* 2019-09-28 15:29  sudo blkid
+ 7549* 2019-09-28 15:37  cat /etc/fstab
+ 7550  2019-09-28 15:37  cd ..
+ 7551  2019-09-28 15:37  ll
+ 7552  2019-09-28 15:37  cd ..
+ 7553  2019-09-28 15:37  ll
+ 7554  2019-09-28 15:39  git clone https://github.com/ndf14685/operadorLinux.git
+ 7555  2019-09-28 15:39  cd operadorLinux
+ 7556  2019-09-28 15:39  ll
+ 7557  2019-09-28 15:39  code notas clase3.txt
+ 7558  2019-09-28 15:40  mkdir clase3
+ 7559  2019-09-28 15:40  mv notas notas clase3
+ 7560  2019-09-28 15:40  mv notas clase3
+ 7561  2019-09-28 15:40  code not
+ 7562  2019-09-28 15:40  ll
+ 7563  2019-09-28 15:40  cd clase3
+ 7564  2019-09-28 15:40  ll
+ 7565  2019-09-28 15:40  code notas
+ 7566  2019-09-28 15:46  cat /etc/mtab 
+ 7567* 2019-09-28 15:48  mount |grep -i media 
+ 7568  2019-09-28 15:49  blkid
+ 7569  2019-09-28 16:00  lsblk -o NAME,LABEL,UUID
+ 7570  2019-09-28 16:02  code notas
+ 7571  2019-09-28 16:19  touch hola
+ 7572  2019-09-28 16:19  echo "Linea" >> hola
+ 7573  2019-09-28 16:20  cat hola
+ 7574  2019-09-28 16:20  echo "Linea" >> hola
+ 7575  2019-09-28 16:20  ln hola hard_hola
+ 7576  2019-09-28 16:20  ll
+ 7577  2019-09-28 16:21  ls -li hola
+ 7578  2019-09-28 16:21  ls -li hard_hola
+ 7579  2019-09-28 16:22  ln -s hola shola
+ 7580  2019-09-28 16:22  ll
+ 7581  2019-09-28 16:22  ls -li shola
+ 7582  2019-09-28 16:23  cat shola
+ 7583  2019-09-28 16:24  echo "Linea_ haRD" >> hard_hola
+ 7584  2019-09-28 16:24  cat shola
+ 7585  2019-09-28 16:28  mkdir otraCarpeta
+ 7586  2019-09-28 16:29  mv hard_hola otraCarpeta
+ 7587  2019-09-28 16:29  ll
+ 7588  2019-09-28 16:29  cd otraCarpeta
+ 7589  2019-09-28 16:29  echo "Esta es otra linea desde hard pero de otra carpeta" >> hard_hola
+ 7590  2019-09-28 16:29  cat hard_hola
+ 7591  2019-09-28 16:29  cat ../hola
+ 7592  2019-09-28 16:30  mkdir otroCarpeta2
+ 7593  2019-09-28 16:30  mv ../hola otroCarpeta2
+ 7594  2019-09-28 16:31  echo "Otra linea desde hard Hola" >> hard_hola
+ 7595  2019-09-28 16:31  cat hard_hola
+ 7596  2019-09-28 16:31  nano otroCarpeta2
+ 7597  2019-09-28 16:31  cd otroCarpeta2
+ 7598  2019-09-28 16:31  mv hola hola2
+ 7599  2019-09-28 16:31  cd ..
+ 7600  2019-09-28 16:31  cat hard_hola
+ 7601  2019-09-28 16:31  cat otroCarpeta2/hola2
+ 7602  2019-09-28 16:32  echo otroCarpeta2/hola2
+ 7603  2019-09-28 16:32  echo "Otra linea desde Hola ya renombradi" >> hola
+ 7604  2019-09-28 16:32  cat hola
+ 7605  2019-09-28 16:32  cd ..
+ 7606  2019-09-28 16:32  ll
+ 7607  2019-09-28 16:32  cd otraCarpeta
+ 7608  2019-09-28 16:32  ll
+ 7609  2019-09-28 16:32  cat hard_hola
+ 7610  2019-09-28 16:33  cd otroCarpeta2
+ 7611  2019-09-28 16:33  ll
+ 7612  2019-09-28 16:33  cd ..
+ 7613  2019-09-28 16:33  cat hola
+ 7614  2019-09-28 16:33  ll
+ 7615  2019-09-28 16:34  echo "Otra linea para hola " >> hola
+ 7616  2019-09-28 16:34  cat hard_hola
+ 7617  2019-09-28 16:34  cat hola
+ 7618  2019-09-28 16:34  cat otroCarpeta2/hola2
+ 7619  2019-09-28 16:34  cd otroCarpeta2
+ 7620  2019-09-28 16:34  mv hola2 hola5
+ 7621  2019-09-28 16:34  echo "Otra linea para hola " >> hola
+ 7622  2019-09-28 16:35  echo "Otra linea para hola " >> hola5
+ 7623  2019-09-28 16:35  cat hola5
+ 7624  2019-09-28 16:35  cat ../hard_hola
+ 7625  2019-09-28 16:37  ll
+ 7626  2019-09-28 16:37  rm hola
+ 7627  2019-09-28 16:37  ll
+ 7628  2019-09-28 16:37  cd ..
+ 7629  2019-09-28 16:37  ll
+ 7630  2019-09-28 16:37  cd ..
+ 7631  2019-09-28 16:37  ll
+ 7632  2019-09-28 16:37  cat shola
+ 7633  2019-09-28 16:37  echo "Otra linea para hola " >> hola
+ 7634  2019-09-28 16:37  ll
+ 7635  2019-09-28 16:37  cat shola
+ 7636  2019-09-28 16:49  ll
+ 7637  2019-09-28 16:49  cd otraCarpeta
+ 7638  2019-09-28 16:49  ll
+ 7639  2019-09-28 16:49  cd otroCarpeta2
+ 7640  2019-09-28 16:50  ll
+ 7641  2019-09-28 16:50  chmod 222 hola5
+ 7642  2019-09-28 16:50  cd ..
+ 7643  2019-09-28 16:51  ll
+ 7644  2019-09-28 16:51  cd otroCarpeta2
+ 7645  2019-09-28 16:51  ll
+ 7646  2019-09-28 16:51  cd ..
+ 7647  2019-09-28 16:51  chmod 777 hard_hola
+ 7648  2019-09-28 16:51  ll
+ 7649  2019-09-28 16:51  cd otroCarpeta2
+ 7650  2019-09-28 16:51  ll
+ 7651  2019-09-28 16:51  cd ..
+ 7652  2019-09-28 16:56  ls -l 
+ 7653  2019-09-28 16:56  cd otroCarpeta2
+ 7654  2019-09-28 16:56  ll
+ 7655  2019-09-28 16:57  echo "Prueba prueba prueba" >> hola6
+ 7656  2019-09-28 16:57  ll
+ 7657  2019-09-28 16:58  ln hola6 hard_hola6
+ 7658  2019-09-28 16:58  ll
+ 7659  2019-09-28 16:59  find / -type f -lynks +1
+ 7660  2019-09-28 16:59  find / -type f
+ 7661  2019-09-28 17:01  ll
+ 7662  2019-09-28 17:01  stat hola6
+ 7663  2019-09-28 17:01  stat hola5
+
+
+
+
+Instalacion de quota:  
+
+  497  sudo apt update
+  498  sudo apt upgrade
+  499  su
+  500  sudo apt dist-upgrade 
+  501  exit
+  502  sudo apt install quota quotatool
+  503  sudo nano /etc/fstab
+  504  cd /
+  505  sudo touch aquota.user aquota.group
+  506  sudo chmod 600 aquota*
+  507  mount -o remount /
+  508  sudo mount -o remount /
+  509  mount
+  510  sudo nano /etc/fstab
+  511  sudo quotacheck -mavug
+  512  sudo mount
+  513  sudo mount |grep *quota*
+  514  cd /
+  515  sudo chmod 600 aquota*
+  516  ll
+  517  sudo mount -o remount
+  518  sudo mount -o remount /
+  519  sudo mount |grep *quota*
+  520  sudo mount
+  521  sudo quotacheck -cfmv -F vfsv0 /dev/sda1
+  522  sudo quotaon -avug
+  523  sudo mount -o remount /
+  524  sudo quotacheck -cfmv -F vfsv0 /dev/sda1
+  525  LL
+  526  ll
+  527  sudo quotacheck -mavug
+  528  sudo quotacheck -cfmv -F vfsv0 /dev/sda1
+  529  sudo quotaon -avug
+  530  sudo quotaoff -avug
+  531  sudo adduser user1
+  532  sudo adduser user2
+  533  sudo edquota
+  534  sudo edquota -u user1
+  535  sudo requota -u /
+  536  sudo repquota -u /
+  537  cd /home/
+  538  ll
+  539  cat /etc/fstab 
+  540  history
