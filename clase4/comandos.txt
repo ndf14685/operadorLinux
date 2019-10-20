@@ -1,0 +1,60 @@
+Para agregar en arranque un proceso
+
+
+A traves de agregado en ~/.bashrc: 
+
+605  cd ..
+  606  cd Desktop/
+  607  ll
+  608  pwd
+  609  cd /etc/
+  610  ls rc*
+  611  ls -ltr rc*
+  612  chkconfig
+  613  ps -p1 |grep init
+  614  ps -p1
+  615  lshw
+  616  cd 
+  617  l
+  618  ll
+  619  nano .bashrc 
+  620  ll
+  621  touch scriptEjecucion.sh
+  622  nano .bashrc 
+  623  nano scriptEjecucion.sh 
+  624  mkdir backup
+  625  cd bak
+  626  cd backup/
+  627  touch pruebaSARAZA.txt
+  628  nano pruebaSARAZA.txt 
+  629  cd ..
+  630  cd backup/
+  631  pwd
+  632  cd 
+  633  nano .bashrc 
+  634  nano scriptEjecucion.sh 
+  635  chmod 777 scriptEjecucion.sh 
+  636  ./scriptEjecucion.sh 
+  637  nano scriptEjecucion.sh 
+  638  ./scriptEjecucion.sh 
+  639  rm Desktop/pruebaSARAZA.txt 
+  640  sudo reboot 
+  641  su
+  642  sudo su
+  643  nano scriptEjecucion.sh 
+
+Usando crontab: 
+
+  644  crontab -e 
+  645  cd Desktop/
+  646  rm pruebaSARAZA.txt 
+  647  top
+  648  crontab -e 
+  649  cd ..
+  650  ll
+  651  nano scriptEjecucion.sh 
+  652  history
+
+
+
+

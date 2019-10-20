@@ -1,0 +1,149 @@
+El proceso de arranque de Debian
+---------------------------------
+
+El programa `init'
+------------------
+
+     Al igual que todos los sistemas Unix, Debian arranca ejecutando el
+     programa `init'.  El archivo de configuración de `init' (que es el
+     `/etc/inittab') indica que el primer script que se debe ejecutar es el
+     `/etc/init.d/rcS'.
+
+     Lo que ocurre a continuación depende de si se encuentra instalado el
+     paquete `sysv-rc' o el `file-rc'.  A continuación, supondremos que se
+     encuentra instalado el paquete `sysv-rc' (`file-rc' contiene su propio
+     script `/etc/init.d/rcS' y utiliza un archivo en vez de enlaces
+     simbólicos en los directorios rc para controlar qué servicios se
+     inician en los diferentes niveles de ejecución)
+
+     El archivo `/etc/init.d/rcS' del paquete `sysv-rc' ejecuta todos los
+     scripts situados en `/etc/rcS.d/' para realizar inicializaciones tales
+     como la comprobación y montaje de los sistemas de archivos, la carga
+     de módulos, la inicialización de los servicios de red, la
+     configuración del reloj, etc.  Luego, y por compatibilidad, también
+     ejecuta todos los archivos (excepto aquellos con un `.'  en su nombre)
+     situados en `/etc/rc.boot/'.  Este último directorio está reservado
+     para el administrador del sistema y su utilización ha caído en desuso.
+     Véase Sección 9.1, `Trucos para la inicialización del sistema' y el
+     Sistema de niveles de ejecución y scripts init.d
+     (http://www.debian.org/doc/debian-policy/ch-opersys#s-sysvinit) en el
+     Manual de Normativa de Debian para más información.
+
+     Debian no utiliza el directorio `rc.local' del tipo BSD.
+
+Niveles de ejecución
+---------------------
+
+     Luego de completar el proceso de arranque, `init' inicia todos los
+     servicios que han sido configurados para ejecutarse en el nivel de
+     ejecución predeterminado.  Este último viene indicado por una entrada
+     `id' en el `/etc/inittab'.  Debian viene con `id=2'.
+
+     Debian utiliza los siguientes niveles de ejecución:
+        * 1 (modo monousuario),
+        * 2 al 5 (modos multiusuario) y
+        * 0 (apagar el sistema),
+        * 6 (reiniciar el sistema).
+     Tambien puede utilizarse los niveles de ejecución 7, 8 y 9 pero sus
+     directorios rc no se van llenando a medida que son instalados los
+     paquetes.
+
+     Cambie los niveles de ejecución utilizando el comando `telinit'.
+
+     Al entrar a un nivel de ejecución se ejecutan todos los scripts
+     ubicadosi en `/etc/rc<nivel_de_ejecución>.d/'.  La primera letra del
+     nombre del script determina la _manera_ en que se ejecuta el script:
+     Los scripts cuyos nombres comienzan con `K' se ejecutan con el
+     argumento `stop'.  Los scripts que comienzan con `S' se ejecutan con
+     el argumento `start'.  Los scripts se ejecutan de acuerdo al orden
+     alfabético de sus nombres; de esta manera los scripts "stop" se
+     ejecutan antes que los scripts "start" y los dos díguitos a
+     continuación de `K' o `S' determinan el orden en que se ejecutan los
+     scripts.
+
+     Los scripts situados en `/etc/rc<nivel_de_ejecución>' son de hecho
+     sólo enlaces simbólicos que apuntan a los scripts situados en
+     `/etc/init.d/' Cada script también acepta como argumento "restart" y
+     "force-reload"; estos métodos se pueden utilizar para reiniciar los
+     servicios una vez que haya sido arrancado el sistema o forzarlos para
+     que vuelvan a cargar sus archivos de configuración.
+
+     Por ejemplo:
+
+          # /etc/init.d/exim4 force-reload
+
+Personalizando los niveles de ejecución
+---------------------------------------
+
+     La personalización de los niveles de ejecución es una tarea avanzada
+     del administrador del sistema.  Los siguientes consejos son válidos
+     para la mayoría de los servicios.
+
+     Para habilitar el servicio <servicio> en el nivel de ejecución <R>
+     cree el enlace simbólico `/etc/rc<R>.d/S<xy><servicio>' con objetivo
+     `../init.d/<servicio>'.  El número de secuencia <xy> debe ser igual al
+     asignado al servicio cuando fue instalado el paquete.
+
+     Para deshabilitar un servicio, cambie de nombre el enlace simbólico de
+     modo que su nombre comience con `K' y no con `S' y su número de
+     secuencia sea 100 menos <xy>.
+
+     Para estos fines, es conveniente usar un editor de niveles de
+     ejecución tales como `sysv-rc-conf' o `ksysv'.
+
+     En vez de cambiarle el nombre, es posible eliminar el enlace simbólico
+     `S' de un servicio de un directorio de niveles de ejecución
+     determinado.  Esto no deshabilita el servicio sino que lo deja en un
+     estado "potencial" al menos en lo que respecta al sistema init
+     `sysv-rc' : al cambiar de nivel de ejecución el servicio no se lo
+     activará ni se lo detendrá sino que se lo dejará como estaba,
+     independientemente si esta ejecutándose o no.  Obsérvese, no obstante,
+     que un servicio que está en este estado potencial se activará si se
+     actualiza su paquete independientemente si estaba o no ejecutándose
+     antes de la actualización.  Este es un atajo conocido del sistema
+     Debian actual.  Nótese además que debería conservar los enlaces
+     simbólicos `K' de un servicio en los niveles de ejecución 0 y 6.  Si
+     borra todos los enlaces simbolicos de un servicio, entonces al
+     actualizar el paquete del mismo restaurará todos los enlaces
+     simbólicos a su estado predeterminado de fábrica.
+
+     _No_ es aconsejable realizar modificaciones a los enlaces simbólicos
+     situados en `/etc/rcS.d/'.
+
+Información ampliada en:
+http://www.debian.org/doc/manuals/reference/reference.es.txt
+secciones : 2.4, 2.4.1, 2.4.2, 2.4.3
+
+Un ejemplo de lo expuesto anteriormente.
+----------------------------------------
+     Para demostrar lo anteriormente expuesto mediante un ejemplo tangible,
+     vamos a realizar un pequeño programa que se encarga de restaurar una
+     copia de seguridad. Tenemos el inconveniente de que los estudiantes 
+     borra iconos dentro del escritorio. Se hizo una copia de el directorio 
+     que contiene los iconos(Desktop), en un directorio llamado backup. 
+     Con el script que veremos a continuación nos encargamos de restaurar el
+     directorio Desktop cada vez que el equipo inicia, todo esto sin darnos 
+     cuenta de lo que ocurre. 
+
+     Pasos para ejecura el thefreezer de Horacio.
+1.- backup.sh : es un archivo que se encarga de realizar una copia entre directorios
+                #!/bin/bash
+                cp -p /home/horacio/backup/*.* /home/horacio/Desktop
+2.- luego convertimos este archivo en ejecutable
+                chmod +x backup.sh
+3.- ponemos el script ya convertido en ejecutable en el directorio 
+                /etc/init.d/backup.sh
+    que es el directorio que contiene los archivos ejecutables del sistema.
+4.- Solo nos falta hacer el enlace simbolico a este script. Un enlace simbólico (symbolic link) es un archivo que apunta a otro archivo o directorio. El archivo de enlace simbólico contiene solamente la ruta del otro archivo o directorio.
+                ln -s /etc/init.d/backup.sh /etc/rc2.d/S98backup.sh
+En este caso la letra "S" delante del archivo S98backup.sh, significa que el archivo esta en modo start, que se ejecutara al invocarlo, en caso contrario le colocamos una letra "K" para específicar que se encuantra en la modalidad stop. El numero 98 indica que se ejecutara antes delproceso identificado como 99.
+
+Listo, con esto realice mi propio "thefreezer" para linux; 
+
+Horacio V. Oneto R.
+Red Universidad Bolivariana de Venezuela
+GNU/linux # Debian Etch Beta 3
+Usuario de Linux # 429114
+Huella de clave: F01F 084A F66F 6905 9D10  F103 1CD1 A925 36B9 FB5C
+horacio@hipatia.info/www.notiubv.com
+Maracaibo - Edo. Zulia

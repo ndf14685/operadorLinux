@@ -57,16 +57,18 @@ Instalar quota
     cd /
     sudo touch aquota.user aquota.group
     sudo chmod 600 aquota*
-    mount -o remount / 
+    sudo mount -o remount / 
     mount 
     sudo quotacheck -mavug
-
+            Proabar esto 
+            sudo quotacheck -cfmv -F vfsv0 /dev/sda1
+            
     sudo quotaon -avug
     sudo quotaoff -avug
-    sudo adduser -d /home/user1 -m user1
-    sudo adduser -d /home/user2 -m user2
-    sudo passwd user1
-    sudo passwd user2
+    sudo adduser user1
+    sudo adduser user2
+    #sudo passwd user1
+    #sudo passwd user2
 
     sudo edquota
                 soft  hard 
